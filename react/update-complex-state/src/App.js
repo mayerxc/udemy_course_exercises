@@ -21,6 +21,29 @@ class App extends Component {
         }
       ]
     };
+    setTimeout( () => {
+      //do something
+      const randInst = Math.floor( Math.random() * this.state.instructors.length );
+      const hobbyIndex = Math.floor( Math.random() * this.state.instructors[randInst].length )
+      const instructors = this.state.instructors.map( (inst, i) => {
+        if (i === randInst) {
+          const hobbies = [...inst.hobbies];
+          hobbies.splice(hobbyIndex, 1);
+          console.log("what is ...inst??");
+          console.log({...inst});
+          console.log({...inst, hobbies});
+          console.log(hobbies);
+          console.log(`randInst is ${randInst}`)
+          return {
+            ...inst, 
+            hobbies
+          }
+        }
+        return inst;
+      });
+      this.setState({instructors});
+      console.log("does this run???")
+    }, 5000);
   }
   render() {
     const instructors = this.state.instructors.map((instructor, index) => (
